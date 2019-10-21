@@ -6,8 +6,18 @@
         $data['success'] = false;
         $data['message']  = 'Failed! Try again';
     } else {
-        $data['success'] = true;
-        $data['message'] = 'Success!';
+        $to_email = "6ojoshdee@gmail.com";
+        $headers = "From: ".$_POST["inputEmail"];
+        $name = $_POST["inputName"];
+        $body = $_POST["inputMessage"];
+
+        if ( mail($to_email, $name, $body, $headers)) {
+            $data['success'] = true;
+            $data['message'] = 'Email successfully!';
+        } else {
+            $data['success'] = false;
+            $data['message'] = 'Email sending failed...';
+        }
     }
 
     // return all our data to an AJAX call
