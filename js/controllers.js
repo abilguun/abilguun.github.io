@@ -16,24 +16,24 @@ app.controller('ContactController', function ($scope, $http) {
             $scope.resultMessage = 'Success!';
             $scope.result='bg-success';
 
-            // $http({
-            //     method  : 'POST',
-            //     url     : 'contact-form.php',
-            //     data    : $.param($scope.formData),  //param method from jQuery
-            //     headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  //set the headers so angular passing info as form data (not request payload)
-            // }).success(function(data){
-            //     console.log(data);
-            //     if (data.success) { //success comes from the return json object
-            //         $scope.submitButtonDisabled = false;
-		    //         $scope.formData = null;
-            //         $scope.resultMessage = data.message;
-            //         $scope.result='bg-success';
-            //     } else {
-            //         $scope.submitButtonDisabled = false;
-			// 		$scope.resultMessage = data.message;
-            //         $scope.result='bg-danger';
-            //     }
-            // });
+            $http({
+                method  : 'POST',
+                url     : 'contact-form.php',
+                data    : $.param($scope.formData),  //param method from jQuery
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  //set the headers so angular passing info as form data (not request payload)
+            }).success(function(data){
+                console.log(data);
+                if (data.success) { //success comes from the return json object
+                    $scope.submitButtonDisabled = false;
+		            $scope.formData = null;
+                    $scope.resultMessage = data.message;
+                    $scope.result='bg-success';
+                } else {
+                    $scope.submitButtonDisabled = false;
+					$scope.resultMessage = data.message;
+                    $scope.result='bg-danger';
+                }
+            });
         } else {
             $scope.submitButtonDisabled = false;
             $scope.resultMessage = 'Failed :( Please fill out all the fields.';
